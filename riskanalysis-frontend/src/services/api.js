@@ -1,11 +1,10 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8081/api",
+  baseURL: "https://software-risk-backend.onrender.com/api",
 });
 
 API.interceptors.request.use((config) => {
-
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -13,7 +12,6 @@ API.interceptors.request.use((config) => {
   }
 
   return config;
-
 });
 
 export default API;
