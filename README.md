@@ -249,7 +249,7 @@ baseURL: "http://localhost:8080/api"
 
 **Zoya Riyan Hussain**
 GitHub: [github.com/zoya-riyan-hussain](https://github.com/zoya-riyan-hussain)
-LinkedIn: (Add your LinkedIn URL)
+LinkedIn:(https://www.linkedin.com/in/zoya-riyan-hussain/)
 
 ---
 
