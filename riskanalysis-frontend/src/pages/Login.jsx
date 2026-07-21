@@ -51,25 +51,6 @@ const login = async () => {
   }
 };
 
-  const login = async () => {
-    setLoading(true);
-
-    try {
-      const res = await API.post("/auth/login", form);
-
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("name", res.data.name);
-      localStorage.setItem("email", res.data.email);
-      localStorage.setItem("role", res.data.role);
-
-      window.location.replace("/");
-    } catch {
-      alert("Invalid Email or Password");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <Box
       sx={{
