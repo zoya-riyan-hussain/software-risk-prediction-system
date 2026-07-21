@@ -38,15 +38,28 @@ const login = async () => {
 
   } catch (error) {
 
-    console.log("========== LOGIN ERROR ==========");
-    console.log(error);
-    console.log(error.response);
-    console.log(error.response?.status);
-    console.log(error.response?.data);
+      console.log("========== LOGIN ERROR ==========");
+      console.log(error);
 
-    alert(JSON.stringify(error.response?.data));
+      if (error.response) {
+        console.log("Status:", error.response.status);
+        console.log("Data:", error.response.data);
 
-  } finally {
+        alert(error.response.data.message || JSON.stringify(error.response.data));
+
+      } else if (error.request) {
+
+        console.log("No response received");
+        alert("Cannot connect to server.");
+
+      } else {
+
+        console.log("Request Error:", error.message);
+        alert(error.message);
+
+      }
+
+    }finally {
     setLoading(false);
   }
 };
