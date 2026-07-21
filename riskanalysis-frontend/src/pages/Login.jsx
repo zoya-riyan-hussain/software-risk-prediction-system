@@ -23,21 +23,33 @@ import {
 
 import API from "../services/api";
 
-function Login() {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+const login = async () => {
+  setLoading(true);
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  try {
+    const res = await API.post("/auth/login", form);
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("name", res.data.name);
+    localStorage.setItem("email", res.data.email);
+    localStorage.setItem("role", res.data.role);
+
+    window.location.replace("/");
+
+  } catch (error) {
+
+    console.log("========== LOGIN ERROR ==========");
+    console.log(error);
+    console.log(error.response);
+    console.log(error.response?.status);
+    console.log(error.response?.data);
+
+    alert(JSON.stringify(error.response?.data));
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   const login = async () => {
     setLoading(true);
