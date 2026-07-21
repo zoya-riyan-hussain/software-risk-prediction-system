@@ -21,12 +21,21 @@ public class AuthController {
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
 
-        User user = userRepository
-                .findByEmail(request.getEmail())
-                .orElseThrow(() ->
-                        new RuntimeException("Invalid Email"));
+        System.out.println("========== LOGIN REQUEST ==========");
+        System.out.println("Email entered: " + request.getEmail());
+        System.out.println("Password entered: " + request.getPassword());
 
-        if (!encoder.matches(request.getPassword(), user.getPassword())) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Invalid Email"));
+
+        System.out.println("User found in DB: " + user.getEmail());
+        System.out.println("Stored Hash: " + user.getPassword());
+
+        boolean matches = encoder.matches(request.getPassword(), user.getPassword());
+
+        System.out.println("Password Match = " + matches);
+
+        if (!matches) {
             throw new RuntimeException("Invalid Password");
         }
 
