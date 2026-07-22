@@ -7,10 +7,71 @@
 ![Material UI](https://img.shields.io/badge/Material_UI-5-blueviolet)
 ![License](https://img.shields.io/badge/License-Apache_2.0-yellow)
 
-A full-stack web application that helps project managers identify, assess, prioritize, and monitor software project risks through a centralized, interactive dashboard — with automatic risk scoring and project/portfolio health tracking.
+A full-stack web application that helps project managers identify, assess, prioritize, and monitor software project risks through a centralized, interactive dashboard — with automatic risk scoring, AI-powered mitigation suggestions, and project/portfolio health tracking.
 
 🔗 **Live Demo:** Coming Soon
 📂 **Repository:** [github.com/zoya-riyan-hussain](https://github.com/zoya-riyan-hussain)
+
+---
+
+## ⚠️ Important Deployment Notes
+
+Thank you for exploring the AI-Powered Software Project Risk Prediction & Analysis System.
+
+### Deployment Information
+
+The application has been successfully deployed and all core features are fully functional, including:
+
+- User Authentication & Role-Based Access
+- Project Management
+- Risk Management
+- Team Management
+- Project Health Dashboard
+- Reports & Analytics
+- Responsive User Interface
+
+**Note:** The AI-powered Risk Mitigation Suggestions are powered by Ollama (LLM), which runs as a local service. Since Ollama cannot currently be hosted on free cloud platforms such as Render, the AI suggestion feature is not available in the deployed version. To experience AI-generated mitigation recommendations, simply run the backend locally with Ollama installed and running on your machine.
+
+### Demo Credentials
+
+**👤 Project Manager (User)**
+Email: `ayesha123@gmail.com`
+Password: `Ayesha@123`
+
+Accessible Features:
+- Dashboard
+- Projects
+- Risks
+- Project Health Dashboard
+- Reports
+- AI Risk Analysis (available only in local setup with Ollama)
+
+Restricted Features:
+- Team Management
+- User Management
+
+**👑 Administrator**
+
+The Administrator has full access to the application, including:
+- Dashboard
+- Project Management
+- Team Management
+- User Management
+- Risk Management
+- Project Health Dashboard
+- Reports & Analytics
+- Complete System Administration
+
+### Local AI Setup
+
+To enable AI-powered mitigation suggestions locally:
+
+1. Install Ollama.
+2. Pull a supported language model (e.g., Llama 3).
+3. Start the Ollama service.
+4. Run the backend application.
+
+Once Ollama is running, the AI Risk Analysis feature will automatically generate intelligent mitigation recommendations for project risks.
 
 ---
 
@@ -59,9 +120,9 @@ Deep dive into a single project's health score, open risks, and critical risk co
 
 Software projects often run into schedule delays, budget overruns, and quality issues because risks are tracked informally, or not tracked at all. RiskAI centralizes risk visibility for project managers — every risk is logged with a probability and impact score, automatically classified by severity (Low/Medium/High/Critical), and rolled up into project-level and portfolio-level health metrics so teams can prioritize what matters most.
 
-This project was built as a solo project to strengthen full-stack development skills — covering REST API design, relational database design, role-based access, and real-time data visualization in a single enterprise-style application.
+This project was built as a solo project to strengthen full-stack development skills — covering REST API design, relational database design, role-based access, LLM integration, and real-time data visualization in a single enterprise-style application.
 
-Note: Risk severity and health scores are currently calculated using a deterministic rule-based formula (Risk Score = Probability × Impact), not machine learning. The AI Insights & Recommendations panel uses rule-based logic on live data. ML-based prediction is listed under Future Enhancements.
+**Note:** Risk severity and health scores are calculated using a deterministic rule-based formula (Risk Score = Probability × Impact). AI Risk Mitigation Suggestions are generated separately using **Ollama**, a locally-run LLM, which analyzes risk details and produces tailored mitigation recommendations. This AI feature is only available when running the backend locally with Ollama installed (see Deployment Notes above for details).
 
 ---
 
@@ -89,6 +150,7 @@ Note: Risk severity and health scores are currently calculated using a determini
 - Risk categorization (Schedule, Technical, Quality, Resource, etc.)
 - Probability & Impact based automatic scoring
 - Automatic severity classification (Low/Medium/High/Critical)
+- AI-generated risk mitigation suggestions (via Ollama, local setup)
 - Risk status tracking (Open/Resolved)
 - Search and filter risks
 - Export risks to PDF
@@ -126,6 +188,10 @@ Note: Risk severity and health scores are currently calculated using a determini
 - Spring Data JPA / Hibernate
 - REST APIs
 - Maven
+
+**AI / LLM**
+- Ollama (local LLM runtime)
+- Used for generating risk mitigation suggestions
 
 **Database**
 - MySQL
@@ -167,6 +233,7 @@ software-risk-prediction-system
 - Node.js 18+
 - MySQL 8.0+
 - Maven
+- Ollama (optional — required only for AI Risk Mitigation Suggestions)
 
 ### 1. Clone the repository
 ```bash
@@ -207,6 +274,19 @@ Update the API base URL if needed in `src/services/api.js`:
 baseURL: "http://localhost:8080/api"
 ```
 
+### 4. Enable AI Risk Mitigation Suggestions (Optional, Local Only)
+
+1. Install [Ollama](https://ollama.com).
+2. Pull a supported language model:
+   ```bash
+   ollama pull llama3
+   ```
+3. Start the Ollama service:
+   ```bash
+   ollama serve
+   ```
+4. Run the backend application as usual — it will automatically connect to your local Ollama instance for AI-generated mitigation recommendations.
+
 ---
 
 ## API Endpoints
@@ -221,6 +301,7 @@ baseURL: "http://localhost:8080/api"
 | POST | /api/risks | Create a new risk |
 | PUT | /api/risks/{id} | Update a risk |
 | DELETE | /api/risks/{id} | Delete a risk |
+| POST | /api/risks/{id}/ai-suggestion | Get AI-generated mitigation suggestion (requires local Ollama) |
 | GET | /api/team | Get all teams |
 | POST | /api/team | Create a team |
 | GET | /api/users | Get all users |
@@ -234,6 +315,7 @@ baseURL: "http://localhost:8080/api"
 
 ## Future Enhancements
 
+- Hosted/cloud-based LLM integration so AI suggestions work in the deployed version
 - Machine Learning-based Risk Prediction & Scoring
 - JWT-based Authentication & Refresh Tokens
 - Email Notifications for Critical Risks
@@ -249,7 +331,7 @@ baseURL: "http://localhost:8080/api"
 
 **Zoya Riyan Hussain**
 GitHub: [github.com/zoya-riyan-hussain](https://github.com/zoya-riyan-hussain)
-LinkedIn:(https://www.linkedin.com/in/zoya-riyan-hussain/)
+LinkedIn: (Add your LinkedIn URL)
 
 ---
 
