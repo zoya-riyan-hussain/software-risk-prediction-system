@@ -9,7 +9,8 @@
 
 A full-stack web application that helps project managers identify, assess, prioritize, and monitor software project risks through a centralized, interactive dashboard — with automatic risk scoring, AI-powered mitigation suggestions, and project/portfolio health tracking.
 
-🔗 **Live Demo:** Coming Soon
+🔗 **Live Demo Frontend (Netlify):** https://nimble-alpaca-f3ffbd.netlify.app/
+🔗Backend (Render): https://software-risk-backend.onrender.com
 📂 **Repository:** [github.com/zoya-riyan-hussain](https://github.com/zoya-riyan-hussain)
 
 ---
@@ -331,7 +332,7 @@ baseURL: "http://localhost:8080/api"
 
 **Zoya Riyan Hussain**
 GitHub: [github.com/zoya-riyan-hussain](https://github.com/zoya-riyan-hussain)
-LinkedIn: (Add your LinkedIn URL)
+LinkedIn: https://www.linkedin.com/in/zoya-riyan-hussain/
 
 ---
 
