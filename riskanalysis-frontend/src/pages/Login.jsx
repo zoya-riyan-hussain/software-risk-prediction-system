@@ -23,46 +23,70 @@ import {
 
 import API from "../services/api";
 
-const login = async () => {
-  setLoading(true);
+function Login() {
 
-  try {
-    const res = await API.post("/auth/login", form);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("name", res.data.name);
-    localStorage.setItem("email", res.data.email);
-    localStorage.setItem("role", res.data.role);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
-    window.location.replace("/");
+  const handleChange = (e) => {
 
-  } catch (error) {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
 
-      console.log("========== LOGIN ERROR ==========");
+    // Remove error while typing
+    setLoginError("");
+  };
+
+  const login = async () => {
+
+    setLoading(true);
+
+    try {
+
+      const res = await API.post("/auth/login", form);
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("name", res.data.name);
+      localStorage.setItem("email", res.data.email);
+      localStorage.setItem("role", res.data.role);
+
+      window.location.replace("/");
+
+    } catch (error) {
+
       console.log(error);
 
-      if (error.response) {
-        console.log("Status:", error.response.status);
-        console.log("Data:", error.response.data);
+      let message = "Invalid Email or Password";
 
-        alert(error.response.data.message || JSON.stringify(error.response.data));
+      if (error.response?.data) {
 
-      } else if (error.request) {
+        if (typeof error.response.data === "string") {
+          message = error.response.data;
+        }
 
-        console.log("No response received");
-        alert("Cannot connect to server.");
-
-      } else {
-
-        console.log("Request Error:", error.message);
-        alert(error.message);
+        else if (error.response.data.message) {
+          message = error.response.data.message;
+        }
 
       }
 
-    }finally {
-    setLoading(false);
-  }
-};
+      setLoginError(message);
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
+  };
 
   return (
     <Box
@@ -72,6 +96,7 @@ const login = async () => {
         bgcolor: "#EEF4FB",
       }}
     >
+
       {/* LEFT PANEL */}
 
       <Box
@@ -89,6 +114,7 @@ const login = async () => {
           p: 8,
         }}
       >
+
         <Security sx={{ fontSize: 70 }} />
 
         <Typography
@@ -120,6 +146,7 @@ const login = async () => {
             borderRadius: 4,
           }}
         >
+
           <Box display="flex" alignItems="center" mb={2}>
             <Assessment color="primary" />
             <Typography ml={2} fontWeight="bold">
@@ -140,7 +167,9 @@ const login = async () => {
               Team Collaboration
             </Typography>
           </Box>
+
         </Paper>
+
       </Box>
 
       {/* RIGHT PANEL */}
@@ -157,6 +186,7 @@ const login = async () => {
           p: 4,
         }}
       >
+
         <Paper
           elevation={8}
           sx={{
@@ -165,6 +195,7 @@ const login = async () => {
             borderRadius: 5,
           }}
         >
+
           <Box textAlign="center">
 
             <Security
@@ -206,6 +237,7 @@ const login = async () => {
             type={showPassword ? "text" : "password"}
             value={form.password}
             onChange={handleChange}
+            error={Boolean(loginError)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -214,17 +246,28 @@ const login = async () => {
                       setShowPassword(!showPassword)
                     }
                   >
-                    {showPassword ? (
-                      <VisibilityOff />
-                    ) : (
-                      <Visibility />
-                    )}
+                    {showPassword
+                      ? <VisibilityOff />
+                      : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               ),
             }}
-            sx={{ mb: 2 }}
           />
+
+          {loginError && (
+            <Typography
+              color="error"
+              sx={{
+                mt: 1,
+                mb: 2,
+                fontSize: 14,
+                fontWeight: 500,
+              }}
+            >
+              {loginError}
+            </Typography>
+          )}
 
           <Box
             display="flex"
@@ -265,7 +308,9 @@ const login = async () => {
           </Typography>
 
         </Paper>
+
       </Box>
+
     </Box>
   );
 }
