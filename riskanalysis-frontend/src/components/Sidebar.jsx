@@ -18,11 +18,11 @@ function Sidebar() {
       ? [{ name: "Projects", icon: <FolderIcon />, path: "/projects" }]
       : []),
 
-    ...(role === "ADMIN" || role === "PROJECT_MANAGER"
+    ...(role === "ADMIN"
       ? [{ name: "Teams", icon: <GroupsIcon />, path: "/teams" }]
       : []),
 
-    ...(role !== "VIEWER"
+    ...(role === "ADMIN" || role === "PROJECT_MANAGER"
       ? [{ name: "Risks", icon: <WarningAmberIcon />, path: "/risks" }]
       : []),
 
